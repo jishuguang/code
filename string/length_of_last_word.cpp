@@ -8,6 +8,7 @@
  * Email: shuguangj@126.com
  * CreateTime: 20190915
  */
+#include <Windows.h>
 
 #include <iostream>
 #include <string>
@@ -36,5 +37,6 @@ int main()
 		length += 1;
 	}
 	cout << length << endl;
+	system("pause");
 	return 0;
 }

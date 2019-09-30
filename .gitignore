@@ -332,4 +332,6 @@ ASALocalRun/
 
 # Special for myself
 jsg_code_lib.*
-vs_*
+main.*
+*.exe
+.vscode/
