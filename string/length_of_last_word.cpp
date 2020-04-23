@@ -17,7 +17,7 @@ using namespace std;
 int main()
 {
 	string s;
-	getline(cin, s);
+	// getline(cin, s);
 	unsigned i = s.size() - 1;
 	unsigned length = 0;
 	while (i > 0) {
