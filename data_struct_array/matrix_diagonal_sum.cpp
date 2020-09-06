@@ -1,6 +1,11 @@
-#include <string>
+/* source: 5491 https://leetcode-cn.com/problems/matrix-diagonal-sum/
+ * input: a square matrix
+ * output: the sum of the matrix diagonals.
+ * author: jishuguang
+ * create: 20200905
+ */
+
 #include <vector>
-#include <iostream>
 using namespace std;
 
 class Solution {
@@ -17,14 +22,3 @@ public:
         return result;        
     }
 };
-
-int main() {
-    int i1 = 1 + 2;
-    int *i2(&i1);
-    int *i3(i2);
-    cout << *i3 << endl;
-    cout << i3[0] << endl;
-    cout << i3[1] << endl;
-    cout << i3[2] << endl;
-    cin >> i1;
-}
