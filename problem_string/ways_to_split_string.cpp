@@ -10,6 +10,11 @@ using namespace std;
 
 class Solution {
 public:
+    int mul(const int& first, const int& second) {
+        int max_sec = MOD / first;
+        int sec = second % max_sec;
+        return sec * first - (MOD - max_sec * first) * (second / max_sec);
+    }
     int numWays(string s) {
         // get the amount of one
         int ones = 0;
@@ -18,7 +23,7 @@ public:
         }
 
         int len = s.size();
-        long long result = 0;
+        int result = 0;
         if (ones > 0) {
             if (ones % 3 == 0) {
                 int first_zeros = 0;
@@ -34,12 +39,12 @@ public:
                         ++second_zeros;
                     }
                 }
-                result = (long long)(first_zeros + 1) * (second_zeros + 1);
+                result = mul(first_zeros + 1, second_zeros + 1);
             }
         } else {
-            result = (long long)(len - 2 + 1) * (len - 2) / 2;
+            result = (len - 1) % 2 == 0 ? mul((len - 1) / 2, len - 2) : mul((len - 2) / 2, len - 1);
         }
-        return result % MOD;
+        return result;
     }
 private:
     static const int MOD = 1000000007;
