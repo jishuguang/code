@@ -16,17 +16,17 @@ public:
         return (start != finish) && (fuel >= abs(locations[start] - locations[finish]));
     }
     int add(const int& first, const int& second) {        
-        int result = 0;
-        if (second > MOD - first) {
-            result = second - (MOD - first);
-        } else {
-            result = first + second;
+        int result = first + second;
+        if (result >= MOD) {
+            result -= MOD;
         }
         return result;
     }
     int countRoutes(vector<int>& locations, int start, int finish, int fuel) {   
+        const int len_max = 100;
+        const int fuel_max = 200;
+        int result[len_max][fuel_max + 1];
         int len = locations.size();
-        int result[len][fuel + 1];
         for (int f = 0; f < fuel + 1; ++f) {
             for (int i = 0; i < len; ++i) {
                 if (f == 0) { // no fuel
@@ -45,7 +45,7 @@ public:
         return add(result[finish][fuel], (start == finish ? 1 : 0));
     }
 private:
-    static const int MOD = 1000000007;    
+    static const int MOD = 1e9 + 7;    
 };
 
 // dp : extra calculation leads to beyond time limit
@@ -53,11 +53,9 @@ private:
 class Solution {
 public:
     int add(const int& first, const int& second) {        
-        int result = 0;
-        if (second > MOD - first) {
-            result = second - (MOD - first);
-        } else {
-            result = first + second;
+        int result = first + second;
+        if (result >= MOD) {
+            result -= MOD;
         }
         return result;
     }
@@ -65,8 +63,10 @@ public:
         if (start > finish){
             return countRoutes(locations, finish, start, fuel);
         }
+        const int len_max = 100;
+        const int fuel_max = 200;
         int len = locations.size();
-        bool can_direct[len][len][fuel + 1];
+        bool can_direct[len_max][len_max][fuel_max + 1];
         for (int k = 0; k < fuel + 1; ++k) {
             for (int i = 0; i < len; ++i) {
                 for (int j = i; j < len; ++j) {                    
@@ -74,7 +74,7 @@ public:
                 }
             }
         }
-        int result[len][len][fuel + 1];
+        int result[len_max][len_max][fuel_max + 1];
         for (int k = 0; k < fuel + 1; ++k) {
             for (int i = 0; i < len; ++i) {
                 for (int j = i; j < len; ++j) {                    
