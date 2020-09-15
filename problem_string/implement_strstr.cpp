@@ -6,7 +6,46 @@
  */
 
 #include <string>
+#include <cmath>
 using namespace std;
+
+// Rabin Karp
+class Solution {
+public:
+    int strStr(string haystack, string needle) {                
+        if (needle.empty()) {
+            return 0;
+        }
+        int needle_len = needle.size();
+        int haystack_len = haystack.size();
+        if (haystack_len < needle_len) {
+            return -1;
+        }
+
+        const int BASE = 26;
+        const int MOD = INT_MAX;
+
+        long needle_hash = 0;
+        long haystack_hash = 0;
+        long max_weight = 1;
+        for (int i = 0; i < needle_len; ++i) {
+            needle_hash = (needle_hash * BASE + (needle[i] - 'a')) % MOD;
+            haystack_hash = (haystack_hash * BASE + (haystack[i] - 'a')) % MOD;
+            max_weight = max_weight * BASE % MOD;
+        }
+        
+        int index = -1;
+        for (int i = 0; i <= haystack_len - needle_len; ++i) {
+            if (needle_hash == haystack_hash && haystack.substr(i, needle_len) == needle) {
+                index = i;
+                break;
+            } else {
+                haystack_hash = (haystack_hash * BASE - (haystack[i] - 'a') * max_weight + (haystack[i + needle_len] - 'a')) % MOD;
+            }
+        }
+        return index;
+    }
+};
 
 // two index
 class Solution {
